@@ -1,0 +1,138 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+
+
+{% block title%} Admin Panel{% endblock%}
+
+{% block contain%}
+
+
+
+<div class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Forms</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Validations</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="ms-auto">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Settings</button>
+                <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
+                    <a class="dropdown-item" href="javascript:;">Another action</a>
+                    <a class="dropdown-item" href="javascript:;">Something else here</a>
+                    <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header px-4 py-3">
+                    <h5 class="mb-0">jQuery Validation</h5>
+                </div>
+                <div class="card-body p-4">
+                   
+                    <form method="post" action="{% url 'super.edit.users.manager' pk=users_edit.pk %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" class="form-control" id="instructor" name="instructor" value="{{user.pk}}">
+
+                        <div class="row mb-3">
+                            <label for="input35" class="col-sm-3 col-form-label">Enter Full Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ users_edit.full_name }}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="input36" class="col-sm-3 col-form-label">User Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="username" name="username" value="{{ users_edit.username }}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="input37" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="Email" name="Email" value="{{ users_edit.email }}">
+                            </div>
+                        </div>
+                       
+
+                            <div class="row mb-3">
+                                <label for="input37" class="col-sm-3 col-form-label">Phone Number</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ users_edit.phone_number }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="input37" class="col-sm-3 col-form-label">image</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" id="image" name="image" value="{{ users_edit.image }}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="input39" class="col-sm-3 col-form-label">status</label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" id="status" name="status">
+                                        <option selected disabled value >{{ users_edit.status }}</option>
+                                        <option value="0">Inactive</option>
+                                        <option value="1">Active</option>
+                                    </select>
+                                </div>
+                            </div>
+                        
+                            <div class="row mb-3">
+                                <label for="input39" class="col-sm-3 col-form-label">Role</label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" id="Role" name="Role">
+                                        <option selected disabled value >{{ users_edit.Role }}</option>
+                                        <option value="is_admin">Admin</option>
+                                        <option value="is_doctor">Doctor</option>
+                                        <option value="is_student">Student</option>
+                                    </select>
+                                </div>
+                            </div>
+                        
+                            
+                            <div class="row mb-3">
+                                <label for="input37" class="col-sm-3 col-form-label">Address</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="Address" name="Address" value="{{ users_edit.Address }}">
+                                </div>
+                            </div>
+
+                        
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button type="submit" class="btn btn-primary px-4" name="submit2">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end row-->
+
+
+</div>
+
+
+  {% endblock%}

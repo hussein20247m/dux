@@ -1,0 +1,82 @@
+{% extends 'frontend/base_dashboard.html' %}
+{% load static %}
+
+
+
+
+
+{% block dashboard_contain %}
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="edit-profile" role="tabpanel" aria-labelledby="edit-profile-tab">
+        <div class="setting-body">
+
+            <form method="post" class="pt-4" action='{% url 'user.profile.update' pk=user.pk%}' enctype="multipart/form-data">
+                {% csrf_token %}
+
+            <h3 class="fs-17 font-weight-semi-bold pb-4">Edit Profile</h3>
+          
+                
+             <div class="input-box col-lg-6">
+                <label class="label-text">Full Name</label>
+                <div class="form-group">
+                    <input class="form-control form--control" type="text" name="full_name" value="{{user.full_name}}" >
+                    <span class="la la-user input-icon"></span>
+                </div>
+            </div>
+
+    
+ 
+                <div class="input-box col-lg-6">
+                    <label class="label-text">Email Address</label>
+                    <div class="form-group">
+                        <input class="form-control form--control" type="email" name="email" value="{{user.email}}" readonly>
+                        <span class="la la-envelope input-icon"></span>
+                    </div>
+                </div><!-- end input-box -->
+                <div class="input-box col-lg-6">
+                    <label class="label-text">Phone Number</label>
+                    <div class="form-group">
+                        <input class="form-control form--control" type="text" name="phone_number" id="phone_number" value="{{user.phone_number}}">
+                        <span class="la la-phone input-icon"></span>
+                    </div>
+                </div><!-- end input-box -->
+                
+                <div class="input-box col-lg-6">
+                    <label class="label-text">Address</label>
+                    <div class="form-group">
+                        <input class="form-control form--control" type="text" name="Address" id="Address" value="{{user.Address}}" >
+                        <span class="la la-user input-icon"></span>
+                    </div>
+                </div><!-- end input-box -->
+
+                <div class="media media-card align-items-center">
+                    <div class="media-img media-img-lg mr-4 bg-gray">
+                        <img class="mr-3" src="{{user.image.url}}" alt="avatar image">
+                    </div>
+                    <div class="media-body">
+                        <div class="file-upload-wrap file-upload-wrap-2">
+                            <input type="file" name="myfile" id="myfile" class="multi file-upload-input with-preview" multiple>
+                            <span class="file-upload-text"><i class="la la-photo mr-2"></i>Upload a Photo</span>
+                        </div><!-- file-upload-wrap -->
+                        <p class="fs-14">Max file size is 5MB, Minimum dimension: 200x200 And Suitable files are .jpg & .png</p>
+                    </div>
+                </div><!-- end media -->
+
+
+
+
+
+
+                <div class="input-box col-lg-6 py-2">
+                    <button class="btn theme-btn">Save Changes</button>
+                </div><!-- end input-box -->
+            </form>
+        </div><!-- end setting-body -->
+    </div><!-- end tab-pane -->
+
+    
+  
+</div><!-- end tab-content -->
+
+{% endblock %}

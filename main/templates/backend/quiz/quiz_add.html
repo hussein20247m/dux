@@ -1,0 +1,152 @@
+
+{% extends 'backend/base.html' %}
+{% load static %}
+
+
+
+
+
+
+
+
+
+
+{% block contain%}
+
+
+
+
+<div class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Forms</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Validations</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="ms-auto">
+            <div class="btn-group">
+                
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
+                    <a class="dropdown-item" href="javascript:;">Another action</a>
+                    <a class="dropdown-item" href="javascript:;">Something else here</a>
+                    <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header px-4 py-3">
+                    <h5 class="mb-0">Quiz Add</h5>
+                </div>
+                <div class="card-body p-4">
+                   
+                    <form method="post" action="{% url 'quiz:quiz.add'%}" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+
+                        <div class="row mb-3">
+                            <label for="input39" class="col-sm-3 col-form-label">Select Lecture</label>
+                            <div class="col-sm-9">
+                                <select class="form-select" id="lecture" name="lecture"> <!-- Updated name attribute to 'lecture' -->
+                                    <option selected disabled value>Choose...</option>
+                                    {% for i in lecture %}
+                                    <option value="{{i.pk}}">{{i}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <div class="row mb-3">
+                            <label for="input39" class="col-sm-3 col-form-label">Select Title</label>
+                            <div class="col-sm-9">
+                                <select class="form-select" id="lecture_title" name="lecture_title"> <!-- Updated name attribute to 'lecture_title' -->
+                                    <option selected disabled value>Choose...</option>
+                                    {% for q in lecture_title %}
+                                    <option value="{{q.pk}}">{{q.title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="input36" class="col-sm-3 col-form-label">title</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="title_quiz" name="title_quiz" placeholder="Enter Code Course">
+                            </div>
+                        </div>
+                      
+                        <div class="row mb-3">
+                            <label for="input39" class="col-sm-3 col-form-label">status</label>
+                            <div class="col-sm-9">
+                                <select class="form-select" id="category_chosse" name="category_chosse">
+                                    <option selected disabled value>Choose...</option>
+                                    <option value="assignment">assignment</option>
+                                    <option value="exam">exam</option>
+                                    <option value="quiz">quiz</option>
+
+                                  </select>
+                            </div>
+                        </div>
+                        
+                  
+                        <div class="row mb-3">
+                            <label for="start_date" class="col-sm-3 col-form-label">number</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="number" name="number" placeholder="start_date">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button type="submit" class="btn btn-primary px-4" name="submit2">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end row-->
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+    <!-- Add this to your HTML body -->
+<script>
+    $(document).ready(function() {
+        $('#lecture').change(function() {
+            var lectureId = $(this).val();
+    
+            // Make an AJAX request to fetch lecture titles
+            $.ajax({
+                url: '{% url "quiz:get_lecture_titles" %}',
+                method: 'GET',
+                data: {'lecture_id': lectureId},
+                success: function(data) {
+                    // Update the lecture_title dropdown with the fetched data
+                    $('#lecture_title').html(data.options);  // Updated selector to match the id of your element
+                }
+            });
+        });
+    });
+</script>
+{% endblock%}
+

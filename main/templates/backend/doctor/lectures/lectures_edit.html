@@ -1,0 +1,96 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+
+{% block contain%}
+
+<div class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Forms</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Validations</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="ms-auto">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Settings</button>
+                <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
+                    <a class="dropdown-item" href="javascript:;">Another action</a>
+                    <a class="dropdown-item" href="javascript:;">Something else here</a>
+                    <div class="dropdown-divider"></div><a class="dropdown-item" href="javascript:;">Separated link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+
+
+   
+    <!--end row-->
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header px-4 py-3">
+                    <h5 class="mb-0">Lectures Titles</h5>
+                </div>
+                <div class="card-body p-4">
+                        {% csrf_token %}
+                        <input type="hidden" class="form-control" id="instructor" name="instructor" value="{{user.pk}}">
+                        <input type="hidden" class="form-control" id="course_id" name="course_id" value="{{course_id}}">
+
+                        <div class="row mb-3">
+                            {% for i in b %}
+
+                            {% for title in i.titles.all %}
+                                   
+                                    <label for="input35" class="col-sm-3 col-form-label">Topic{{ forloop.counter }}</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" value="{{ title.title }}" id="name_{{ forloop.counter }}" name="name_{{ forloop.counter }}" readonly>
+                                        
+                                    </div>
+                                   <span class="col-sm-1 d-flex order-actions">
+        
+                                            <a href="{% url 'sublectures.edit' pkL=i.pk pk=title.pk %}" class=""><i class='bx bxs-edit'></i></a>
+            
+                                        </span>
+
+                                   
+                                   
+                                    {% endfor %}
+  
+                           {% endfor %}
+
+
+
+
+                    
+                    
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end row-->
+</div>
+
+
+
+
+
+
+
+	
+
+
+{% endblock%}
+

@@ -1,0 +1,67 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+
+{% block contain%}
+
+<div class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Tables</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-xl-9 mx-auto">
+        <h6 class="mb-0 text-uppercase">Basic example</h6>
+        <hr/>
+        <div class="card">
+            <div class="card-body">
+                <form  method="post" action="{% url 'subtitle.edit.contain' pk=sub.pk%}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <label for="formFile" class="form-label">Lecture</label>
+
+                <div class="input-group mb-3"> 
+                    <input type="text" class="form-control" id="lecture" name="lecture"  value="{{sub.lecture_id}}" aria-label="Username" aria-describedby="basic-addon1" >
+                </div>
+                <label for="formFile" class="form-label">title</label>
+
+                <div class="input-group mb-3"> 
+                    <input type="text" class="form-control" id="title" name="title"  value="{{sub.title}}"  aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <label for="basic-url" class="form-label">Your vanity URL</label>
+                <div class="input-group mb-3"> 
+                    <input type="text" class="form-control" id="URL" name="URL"  value="{{sub.video_url}}" aria-describedby="basic-addon3">
+                </div>
+             
+
+                <label for="formFile" class="form-label">PDF:<span > {{sub.pdf_file}}  </span> <span> <a href="{{sub.pdf_file.url}}" class='bx bxs-download' download> </a> </span></label>
+                <div class="input-group mb-3"> 
+                </div>
+                <input type="file" class="form-control" id="pdfFile" name="pdfFile" value="{{sub.pdf_file}}" aria-describedby="basic-addon3">
+
+
+
+                <label for="formFile" class="form-label">Exam link</label>
+                <div class="input-group mb-3"> 
+                    <input type="text" class="form-control" id="Examlink" name="Examlink" value="{{sub.exam_link}}" aria-describedby="basic-addon3">
+                </div>
+                <button type="submit" class="btn btn-primary px-4" name="submit2">Submit</button>
+
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+<!--end row-->
+
+
+{% endblock%}
+

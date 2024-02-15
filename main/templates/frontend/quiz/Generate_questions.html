@@ -1,0 +1,107 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+
+
+
+
+{% block contain%}
+
+
+
+
+
+
+
+
+
+
+<!-- ================================
+    START BREADCRUMB AREA
+================================= -->
+<section class="breadcrumb-area">
+    <div class="bg-white py-3 pattern-bg">
+        <div class="container">
+          
+    </div>
+    
+
+</section><!-- end breadcrumb-area -->
+<!-- ================================
+    END BREADCRUMB AREA
+================================= -->
+
+<!-- ================================
+       START QUIZ ANS AREA
+================================= -->
+
+<form method="post" action="{% url 'sunbmit_grades' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{user.pk}}">
+    <input type="hidden" class="form-control" id="Lecture_id" name="Lecture_id" value="{{Lecture_id}}">
+    <input type="hidden" class="form-control" id="course_id" name="course_id" value="{{course_id}}">
+    <input type="hidden" class="form-control" id="quiz_id" name="quiz_id" value="{{quiz_id}}">
+    <input type="hidden" class="form-control" id="subtopics" name="subtopics" value="{{subtopics}}">
+
+
+<section class="quiz-ans-wrap pt-10px pb-10px">
+    <div class="container">
+        <div class="quiz-ans-content">
+            <h3 class="fs-22 font-weight-semi-bold">{{question1}}</h3>
+            <input type="hidden" class="form-control" id="question1" name="question1" value="{{question1.pk}}">
+
+            <h5 class="fs-22 font-weight-semi-bold">Your Answer:</h5>
+            <div class="quiz-ans-list py-3">
+                {% for i in mCQuestion1 %}
+                    <div class="custom-control custom-radio mb-1">
+                        <input type="radio" class="custom-control-input" id="quizAnsRadio{{ i.id }}" name="answer1" value="{{ i.choice }}" required>
+
+                        <label class="custom-control-label custom--control-label" for="quizAnsRadio{{ i.id }}">
+                            {{ i.choice }}{% if i.correct %}(coret){% endif %}
+                        </label>
+
+                    </div><!-- end custom-control -->
+                {% endfor %}
+                
+
+            </div><!-- end quiz-ans-list -->
+        </div>
+    </div><!-- end container -->
+</section>
+
+<section class="quiz-ans-wrap pt-10x pb-10px">
+    <div class="container">
+        <div class="quiz-ans-content">
+            <h3 class="fs-22 font-weight-semi-bold">{{question2}}</h3>
+            <input type="hidden" class="form-control" id="question2" name="question2" value="{{question2.pk}}">
+
+            <h5 class="fs-22 font-weight-semi-bold">Your Answer:</h5>
+            <div class="quiz-ans-list py-3">
+                {% for i in mCQuestion2 %}
+                    <div class="custom-control custom-radio mb-1">
+                        <input type="radio" class="custom-control-input" id="quizAnsRadio{{ i.id }}" name="answer2" value="{{ i.choice }}" required>
+
+                        <label class="custom-control-label custom--control-label" for="quizAnsRadio{{ i.id }}">
+                            {{ i.choice }}{% if i.correct %}(coret){% endif %}
+                        </label>
+                    </div><!-- end custom-control -->
+
+                {% endfor %}
+              
+
+            </div><!-- end quiz-ans-list -->
+        </div>
+    </div><!-- end container -->
+</section>
+
+<div class="row">
+    <label class="col-sm-3 col-form-label"></label>
+    <div class="col-sm-9">
+        <div class="d-md-flex d-grid align-items-center gap-3">
+            <button type="submit" class="btn btn-primary px-4" name="submit2">Submit</button>
+        </div>
+    </div>
+</div>
+                    </form>
+
+{% endblock%}

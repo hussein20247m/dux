@@ -1,0 +1,40 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+
+
+
+
+
+
+
+
+
+{% block contain%}
+
+<h2>Choices</h2>
+<ul>
+    {% for i in question %}
+        <li>{{ i}}</li>
+    {% endfor %}
+</ul>
+
+{{question_M }}
+<ul>
+{% for i in mCQuestion %}
+<li>{{ i.choice }}{% if i.correct %} (Correct){% endif %}</li>
+{% endfor %}
+</ul>
+
+
+{% endblock%}
+
+
+
+
+
+
+
+
+
+

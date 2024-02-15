@@ -1,0 +1,78 @@
+<!-- quiz_detail.html -->
+
+{% extends 'backend/base.html' %}
+{% load static %}
+
+
+{% block contain%}
+<div class="page-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <!-- ... (unchanged) ... -->
+    </div>
+    <!--end breadcrumb-->
+
+    <h6 class="mb-0 text-uppercase">DataTable Import</h6>
+    <hr/>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+    <form method="post" action="#" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="row mb-3">
+
+        <label for="input39" class="col-sm-3 col-form-label">Select Lecture</label>
+        <div class="col-sm-9">
+            <select class="form-select" id="lecture" name="lecture">
+                <option selected disabled value>Choose...</option>
+                {% for question in question.get_questions %}
+                <option value="{{question.pk}}">{{ question.content }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="row mb-3">
+            <label for="input39" class="col-sm-3 col-form-label">Select Lecture Title</label>
+            <div class="col-sm-9">
+                <select class="form-select" id="lecture_title" name="lecture_title">
+                    <option selected disabled value>Choose...</option>
+                    {% for i in lecture_title %}
+                    <option value="{{i.pk}}">{{i}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </form>
+
+    </div>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Initially hide the lecture title
+        $('#lecture_title').hide();
+        // Initially hide the quiz body
+
+        $('#lecture').change(function () {
+            var lectureId = $(this).val();
+            $.ajax({
+                url: '{% url "quiz:get_question" %}',
+                method: 'GET',
+                data: {'lecture_id': lectureId},
+                success: function (data) {
+                    $('#lecture_title').html(data.options).show();  // Show the lecture title and update its content
+                    $('#quiz-body').empty().hide();  // Clear and hide the quiz body when lecture changes
+                }
+            });
+        });
+
+      
+        
+    });
+</script>
+{% endblock%}
+
+
